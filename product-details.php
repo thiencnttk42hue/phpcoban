@@ -57,7 +57,10 @@
         </div>
 
         <!-- Header Area Start -->
-       <?php include_once('./inc/header.php')?>
+        <header class="header-area clearfix">
+        <?php include_once('./inc/header.php') ?>
+        <?php include_once('./inc/sidebar.php') ?>
+        </header>
         <!-- Header Area End -->
 
         <!-- Product Details Area Start -->
