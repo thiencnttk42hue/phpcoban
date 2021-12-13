@@ -32,6 +32,7 @@ $stmt->execute();
 
 <div class="card-body">
  <h4 class="card-title">DANH SÁCH LOẠI SẢN PHẨM</h4>
+ <a class="btn btn-primary" style = "margin-bottom:10px;" href="create.php">Thêm</a>
  <table class="table table-bordered">
     <thead>
       <tr>
@@ -55,7 +56,6 @@ $stmt->execute();
       <?php }?>
     </tbody>
   </table>
-  <a class="btn btn-primary" style = "margin-top:10px;" href="create.php">Thêm</a>
 </div>
   
 </body>
