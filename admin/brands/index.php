@@ -30,6 +30,22 @@ $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $stmt->execute();
 ?>
 
+<!--hàm xóa -->
+<?php 
+if(isset($_GET['id'])){
+    
+    $stmt = $pdo->prepare("DELETE FROM `brands` WHERE id = :id");
+    $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    
+    if($stmt->execute()){
+        header('location: index.php');
+    }
+
+}
+
+?>
+
 <div class="card-body">
  <h4 class="card-title">DANH SÁCH NHÃN HÀNG</h4>
  <a class="btn btn-primary" style = "margin-bottom:10px;" href="create.php">Thêm</a>
