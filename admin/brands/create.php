@@ -24,13 +24,12 @@
 </head>
 
 <body>
-
 <?php
      include '../../dbconnect.php';
-    if(isset($_POST['name']) || isset($_POST['desc'])){
-        echo 'spam';
-        die();
-    }   
+    // if(isset($_POST['name']) || isset($_POST['desc'])){
+    //     echo 'spam';
+    //     die();
+    // }   
 ?>
 <?php 
     if(isset($_POST['btnThem'])){
