@@ -26,16 +26,13 @@
 <body>
 
 <?php
-     include '../../dbconnect.php';
-    // if(!isset($_POST['name']) || !isset($_POST['desc'])){
-    //     // echo 'spam';
-    //     // die();
-    // }
+    include '../../dbconnect.php';   
     if(!isset($_GET['id'])){
         echo 'span';
         die();
-    }
-    
+    }   
+?>
+<?php 
     $stmt = $pdo->prepare("SELECT * from brands where id = :id");
     $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -53,10 +50,6 @@
         }
          header("Location: index.php"); 
     } 
-?>
-<?php 
-    // $nameBrand = $_POST['name'];    
-    // $descBrand = $_POST['desc'];
 ?>
 <div class="card-body" style = " width:1000px; margin: 0 auto;">
     <h1 class="card-title">Chỉnh sửa nhãn hiệu</h1>   
