@@ -25,7 +25,7 @@ if(!function_exists('ec_register_js')){
     }
 }
 
-if(!function_exists('ec_enqueue_css')){
+if(!function_exists('ec_enqueue_js')){
     function ec_enqueue_js(){
         ec_register_js('admin/vendors/js/vendor.bundle.base.js');
         ec_register_js('admin/vendors/js/vendor.bundle.addons.js');
@@ -37,6 +37,11 @@ if(!function_exists('ec_enqueue_css')){
 if(!function_exists('get_assets_url')){
     function get_assets_url($path = ""){
         return BASE_URL . "assets/$path";
+    }
+}
+if(!function_exists('get_admin_url')){
+    function get_admin_url($path = ""){
+        return BASE_URL . "admin/$path";
     }
 }
 ?>

@@ -1,68 +1,88 @@
+
+
+
+<?php include '../functions.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <!-- Required meta tags -->
-     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title></title>
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="../assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../assets/vendors/iconfonts/ionicons/dist/css/ionicons.css">
-    <link rel="stylesheet" href="../assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.addons.css">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <link rel="stylesheet" href="../assets/vendors/icheck/skins/all.css">
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="../assets/css/shared/style.css">
-    <!-- endinject -->
-    <!-- Layout styles -->
-    <link rel="stylesheet" href="../assets/css/demo_1/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Quản Lý Customers</title>
+<?php ec_enqueue_css() ?>
 </head>
 <body>
-
 <?php
 include '../../dbconnect.php';
 $stmt = $pdo->prepare('SELECT * from customers');
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $stmt->execute();
 ?>
-
-<div class="card-body">
- <h4 class="card-title">DANH SÁCH KHÁCH HÀNG</h4>
- <a class="btn btn-primary" style = "margin-bottom:10px;" href="create.php">Thêm</a>
- <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Số thứ tự</th>
-        <th>Họ tên</th>
-        <th>Email</th>
-        <th>PassWord</th>
-        <th>Địa chỉ</th>
-        <th>Số điện thoại</th>
-        <th>Chức năng</th>
-      </tr>
-    </thead>
-    <tbody>
-        <?php
-        $i = 1;  
-        while($row = $stmt->fetch()){ 
-            ?>
-      <tr>
-        <td><?php echo $i++ ?></td>
-        <td><?php echo $row['fullname'] ?></td> 
-        <td><?php echo $row['email'] ?></td> 
-        <td><?php echo $row['pass'] ?></td> 
-        <td><?php echo $row['adress'] ?></td> 
-        <td><?php echo $row['phone'] ?></td> 
-        <td><a class="btn btn-primary" href="edit.php?id=<?php echo $row['id']?>">Sửa</a></td> 
-        <td><a class="btn btn-primary" href="index.php?id=<?php echo $row['id']?>">Xóa</a></td>     
-      </tr>    
-      <?php }?>
-    </tbody>
-  </table>
-</div>
-</body>
+<!--hàm xóa -->
+<?php 
+if(isset($_GET['id'])){   
+  $stmt = $pdo->prepare("DELETE FROM `customers` WHERE id = :id");
+  $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
+  $stmt->setFetchMode(PDO::FETCH_ASSOC);  
+  if($stmt->execute()){
+    header('location: index.php');
+  }
+}
+?>
+  <div class="container-scroller">
+    <!-- begin header -->
+    <?php include '../inc/header.php' ?>
+      <!-- end header -->
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- begin sidebar -->
+    <?php include '../inc/sidebar.php' ?>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">DANH SÁCH KHÁCH HÀNG</h4>
+                  <a class="btn btn-primary" style = "margin-bottom:10px;" href="create.php">Thêm</a>
+                  <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Số thứ tự</th>
+                          <th>Họ tên</th>
+                          <th>Email</th>
+                          <th>PassWord</th>
+                          <th>Địa chỉ</th>
+                          <th>Số điện thoại</th>
+                          <th>Chức năng</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <?php
+                          $i = 1;  
+                          while($row = $stmt->fetch()){ 
+                              ?>
+                        <tr>
+                          <td><?php echo $i++ ?></td>
+                          <td><?php echo $row['fullname'] ?></td> 
+                          <td><?php echo $row['email'] ?></td> 
+                          <td><?php echo $row['pass'] ?></td> 
+                          <td><?php echo $row['adress'] ?></td> 
+                          <td><?php echo $row['phone'] ?></td> 
+                          <td><a class="btn btn-primary" href="edit.php?id=<?php echo $row['id']?>">Sửa</a></td> 
+                          <td><a class="btn btn-primary" href="index.php?id=<?php echo $row['id']?>">Xóa</a></td>     
+                        </tr>    
+                        <?php }?>
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>       
+          </div>                  
+        </div> 
+        <?php include_once '../inc/footer.php' ?>      
+      </div>               
+    </div>
+  </div> 
+  <?php ec_enqueue_js() ?>  
+  </body>
 </html>

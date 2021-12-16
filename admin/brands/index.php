@@ -26,7 +26,6 @@ if(isset($_GET['id'])){
 }
 ?>
   <div class="container-scroller">
-    <!-- partial:partials/_navbar.html -->
     <!-- begin header -->
     <?php include '../inc/header.php' ?>
       <!-- end header -->
@@ -73,11 +72,10 @@ if(isset($_GET['id'])){
             </div>       
           </div>
         </div>
-      </div>      <!-- main-panel ends -->
+        <?php include_once '../inc/footer.php' ?> 
+      </div>     
     </div>
-    <!-- page-body-wrapper ends -->
-    <?php include '../inc/footer.php' ?>
   </div> 
-  <?php ec_enqueue_js()?>   
+  <?php ec_enqueue_js() ?>  
   </body>
 </html>
